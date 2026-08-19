@@ -1,0 +1,36 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Go
+backend/bin/
+backend/tmp/
+*.exe
+*.test
+*.out
+coverage.out
+coverage.html
+
+# Node / Extension
+extension/node_modules/
+extension/dist/
+extension/*.zip
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Docker
+postgres_data/
+
+# Logs
+*.log
+
+# Secrets
+*.pem
+credentials.json
+client_secret*.json
