@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mailtrack</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Mailtrack</h1>
+      <p class="subtitle">Gmail email tracking</p>
+    </header>
+
+    <div id="auth-section">
+      <button id="sign-in-btn" class="btn btn-primary">Sign in with Google</button>
+      <div id="user-info" class="hidden">
+        <p id="user-email"></p>
+        <button id="sign-out-btn" class="btn btn-secondary">Sign out</button>
+      </div>
+    </div>
+
+    <div id="emails-section" class="hidden">
+      <h2>Tracked Emails</h2>
+      <div id="email-list"></div>
+      <button id="refresh-btn" class="btn btn-secondary">Refresh</button>
+    </div>
+
+    <p id="error" class="error hidden"></p>
+  </div>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
