@@ -1,4 +1,4 @@
-.PHONY: dev test lint migrate-up migrate-down migrate-create docker-up docker-down build-ext
+.PHONY: dev test lint migrate-up migrate-down migrate-create docker-up docker-down build-ext serve-website
 
 DATABASE_URL ?= postgres://mailtrack:mailtrack@localhost:5432/mailtrack?sslmode=disable
 
@@ -30,6 +30,9 @@ lint:
 
 build-ext:
 	cd extension && npm run build
+
+serve-website:
+	cd website && python3 -m http.server 3000
 
 build:
 	cd backend && go build -o bin/server ./cmd/server

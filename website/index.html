@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track when your Gmail emails are opened — directly inside Gmail. No separate email client.">
+  <title>Trackmail — Email Tracker for Gmail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,700;1,500&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="logo">Trackmail</a>
+    <a href="#install" class="nav-cta">Add to Chrome</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Gmail email tracking</p>
+      <h1>Know when your emails<br>are <em>actually</em> opened.</h1>
+      <p class="hero-lead">
+        A lightweight Chrome extension that lives inside Gmail.
+        Toggle tracking on, send as usual — see opens without leaving your inbox.
+      </p>
+      <div class="hero-actions">
+        <a href="#install" class="btn btn-primary">Install for Chrome — Free</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <p class="hero-note">Works with Gmail on the web · No separate email app · $0 to start</p>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="compose-mock">
+        <div class="compose-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <div class="compose-body">
+          <div class="compose-row"><span class="label">To</span><span class="value">alex@company.com</span></div>
+          <div class="compose-row"><span class="label">Subject</span><span class="value">Follow-up on proposal</span></div>
+          <div class="compose-text">Hi Alex, just checking in on the proposal we sent last week…</div>
+          <div class="compose-footer">
+            <label class="track-toggle">
+              <input type="checkbox" checked disabled>
+              <span>Track email ✓</span>
+            </label>
+            <span class="send-btn">Send</span>
+          </div>
+        </div>
+        <div class="status-card">
+          <div class="status-title">Follow-up on proposal</div>
+          <div class="status-meta">alex@company.com</div>
+          <div class="status-open">👁 Opened · 10:42 PM</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section features" id="features">
+    <h2>Why Trackmail</h2>
+    <div class="feature-grid">
+      <article class="feature">
+        <span class="feature-num">01</span>
+        <h3>Stays inside Gmail</h3>
+        <p>Compose, format, attach, and send exactly as you always do. We add a toggle — not a new inbox.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">02</span>
+        <h3>Open notifications</h3>
+        <p>See when a recipient opens your email. Follow up while you're still top of mind.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">03</span>
+        <h3>Per-email control</h3>
+        <p>Enable tracking only when you need it. One click on, one click off.</p>
+      </article>
+      <article class="feature">
+        <span class="feature-num">04</span>
+        <h3>Private by design</h3>
+        <p>We don't store email bodies. Tracking tokens are hashed. IPs are never kept in raw form.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section how" id="how">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li>
+        <strong>Install the extension</strong>
+        <span>Add Trackmail to Chrome and sign in with Google.</span>
+      </li>
+      <li>
+        <strong>Enable tracking in compose</strong>
+        <span>Flip "Track email" on before you hit Send.</span>
+      </li>
+      <li>
+        <strong>Send through Gmail</strong>
+        <span>Your email goes out normally — with an invisible tracking pixel.</span>
+      </li>
+      <li>
+        <strong>See when it's opened</strong>
+        <span>Check status in the extension popup or your tracked list.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section install" id="install">
+    <div class="install-card">
+      <h2>Ready to track smarter?</h2>
+      <p>Free during development. Install locally or from the Chrome Web Store when published.</p>
+      <a href="#" class="btn btn-primary btn-lg">Add Trackmail to Chrome</a>
+      <p class="install-hint">Requires Gmail on the web · Manifest V3 · Open source</p>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <h2>Questions</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>How does email tracking work?</summary>
+        <p>A tiny invisible image (tracking pixel) is embedded in your email. When the recipient's email client loads images, our server records an open event.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need a separate email app?</summary>
+        <p>No. Trackmail enhances Gmail's existing compose window. You never leave Gmail.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How accurate is open tracking?</summary>
+        <p>An open means the pixel was fetched — often via Gmail's image proxy — not proof a human read the email. Some opens may be false positives from prefetching.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is it free?</summary>
+        <p>Yes for the MVP. The stack runs locally for $0 during development — PostgreSQL, Go backend, Chrome extension.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What data do you collect?</summary>
+        <p>Recipient address, subject line, open timestamps, and aggregated open counts. We do not store email body content.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="logo">Trackmail</span>
+      <nav class="footer-links">
+        <a href="https://github.com/bharathkumaarr/trackmail">GitHub</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <p class="copyright">© 2026 Trackmail</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
