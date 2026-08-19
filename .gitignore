@@ -17,6 +17,11 @@ extension/node_modules/
 extension/dist/
 extension/*.zip
 
+# Website (Next.js)
+website/node_modules/
+website/.next/
+website/out/
+
 # IDE
 .idea/
 .vscode/

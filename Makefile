@@ -32,7 +32,10 @@ build-ext:
 	cd extension && npm run build
 
 serve-website:
-	cd website && python3 -m http.server 3000
+	cd website && npm run dev
+
+build-website:
+	cd website && npm run build
 
 build:
 	cd backend && go build -o bin/server ./cmd/server
