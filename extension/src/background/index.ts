@@ -41,7 +41,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 async function handlePrepareTracking(payload: { recipient: string; subject: string }) {
   const token = await getToken();
   if (!token) {
-    throw new Error('Not authenticated. Open the Mailtrack popup to sign in.');
+    throw new Error('Not authenticated. Open the Trackmail extension popup to sign in.');
   }
   api.setToken(token);
 

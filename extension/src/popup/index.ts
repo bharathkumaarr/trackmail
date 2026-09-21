@@ -2,6 +2,7 @@ import type { TrackedEmail } from '../types';
 
 const signInBtn = document.getElementById('sign-in-btn')!;
 const signOutBtn = document.getElementById('sign-out-btn')!;
+const authSection = document.getElementById('auth-section')!;
 const userInfo = document.getElementById('user-info')!;
 const userEmail = document.getElementById('user-email')!;
 const emailsSection = document.getElementById('emails-section')!;
@@ -19,38 +20,79 @@ function clearError() {
 }
 
 function formatTime(iso: string): string {
-  return new Date(iso).toLocaleString(undefined, {
-    hour: 'numeric',
-    minute: '2-digit',
+  const date = new Date(iso);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  if (diffMins < 1440) return `${Math.floor(diffMins / 60)}h ago`;
+
+  return date.toLocaleString(undefined, {
     month: 'short',
     day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
   });
 }
 
 function renderEmails(emails: TrackedEmail[]) {
   if (emails.length === 0) {
-    emailList.innerHTML = '<p class="empty-state">No tracked emails yet.<br>Enable "Track email" when composing in Gmail.</p>';
+    emailList.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon-circle">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2L11 13"></path>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </div>
+        <p class="empty-title">No tracked emails yet</p>
+        <p class="empty-desc">Check <strong>Track email</strong> in your Gmail compose box before hitting send.</p>
+      </div>
+    `;
     return;
   }
 
   emailList.innerHTML = emails
     .map((e) => {
-      let statusClass = 'status-not-opened';
-      let statusText = 'Not opened';
+      let statusBadge = '<span class="status-badge status-not-opened"><span class="badge-dot"></span>Unopened</span>';
 
       if (e.open_count > 0 && e.last_opened_at) {
-        statusClass = 'status-opened';
-        statusText = `👁 Opened ${formatTime(e.last_opened_at)}${e.open_count > 1 ? ` (${e.open_count}x)` : ''}`;
+        statusBadge = `
+          <span class="status-badge status-opened">
+            <svg class="badge-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Opened ${formatTime(e.last_opened_at)}${e.open_count > 1 ? ` <span class="badge-count">${e.open_count}x</span>` : ''}
+          </span>
+        `;
       } else if (e.status === 'sent') {
-        statusClass = 'status-sent';
-        statusText = '✓ Sent';
+        statusBadge = `
+          <span class="status-badge status-sent">
+            <svg class="badge-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Sent
+          </span>
+        `;
       }
 
       return `
         <div class="email-item">
-          <div class="email-subject">${escapeHtml(e.subject || '(no subject)')}</div>
-          <div class="email-recipient">${escapeHtml(e.recipient)}</div>
-          <div class="email-status ${statusClass}">${statusText}</div>
+          <div class="email-header">
+            <div class="email-subject" title="${escapeHtml(e.subject || '(no subject)')}">${escapeHtml(e.subject || '(no subject)')}</div>
+          </div>
+          <div class="email-recipient">
+            <svg class="recipient-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span>${escapeHtml(e.recipient)}</span>
+          </div>
+          <div class="email-status-row">
+            ${statusBadge}
+          </div>
         </div>
       `;
     })
@@ -66,48 +108,64 @@ function escapeHtml(s: string): string {
 async function checkAuth() {
   const stored = await chrome.storage.local.get(['mailtrack_token', 'mailtrack_user']);
   if (stored.mailtrack_token && stored.mailtrack_user) {
-    signInBtn.classList.add('hidden');
+    authSection.classList.add('hidden');
     userInfo.classList.remove('hidden');
     emailsSection.classList.remove('hidden');
     userEmail.textContent = stored.mailtrack_user.email;
     await loadEmails();
+  } else {
+    authSection.classList.remove('hidden');
+    userInfo.classList.add('hidden');
+    emailsSection.classList.add('hidden');
   }
 }
 
 async function loadEmails() {
   clearError();
-  const response = await chrome.runtime.sendMessage({ type: 'LIST_EMAILS' });
-  if (response?.error) {
-    showError(response.error);
-    return;
+  refreshBtn.classList.add('refreshing');
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'LIST_EMAILS' });
+    if (response?.error) {
+      showError(response.error);
+      return;
+    }
+    renderEmails(response.emails || []);
+  } catch (err: any) {
+    showError(err?.message || 'Failed to load tracked emails');
+  } finally {
+    setTimeout(() => refreshBtn.classList.remove('refreshing'), 400);
   }
-  renderEmails(response.emails || []);
 }
 
 signInBtn.addEventListener('click', async () => {
   clearError();
-  signInBtn.textContent = 'Signing in...';
+  const originalHtml = signInBtn.innerHTML;
+  signInBtn.textContent = 'Connecting...';
   signInBtn.setAttribute('disabled', 'true');
 
-  const response = await chrome.runtime.sendMessage({ type: 'AUTHENTICATE' });
-  signInBtn.removeAttribute('disabled');
-  signInBtn.textContent = 'Sign in with Google';
+  try {
+    const response = await chrome.runtime.sendMessage({ type: 'AUTHENTICATE' });
+    if (response?.error) {
+      showError(response.error);
+      return;
+    }
 
-  if (response?.error) {
-    showError(response.error);
-    return;
+    authSection.classList.add('hidden');
+    userInfo.classList.remove('hidden');
+    emailsSection.classList.remove('hidden');
+    userEmail.textContent = response.user.email;
+    await loadEmails();
+  } catch (err: any) {
+    showError(err?.message || 'Sign in failed');
+  } finally {
+    signInBtn.removeAttribute('disabled');
+    signInBtn.innerHTML = originalHtml;
   }
-
-  signInBtn.classList.add('hidden');
-  userInfo.classList.remove('hidden');
-  emailsSection.classList.remove('hidden');
-  userEmail.textContent = response.user.email;
-  await loadEmails();
 });
 
 signOutBtn.addEventListener('click', async () => {
   await chrome.runtime.sendMessage({ type: 'SIGN_OUT' });
-  signInBtn.classList.remove('hidden');
+  authSection.classList.remove('hidden');
   userInfo.classList.add('hidden');
   emailsSection.classList.add('hidden');
 });
