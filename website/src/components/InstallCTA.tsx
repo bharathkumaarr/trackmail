@@ -16,8 +16,8 @@ export function InstallCTA() {
           </h2>
 
           <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-slate-300">
-            Join thousands of professionals, freelancers, and teams who never wonder
-            if their emails got read.
+            Stop guessing if your pitch or follow-up got seen. Takes 20 seconds to set up,
+            zero credit card needed, no catch.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -25,7 +25,7 @@ export function InstallCTA() {
               href="#"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-8 py-4 text-base font-bold text-white shadow-sm transition-bounce hover:-translate-y-1 hover:bg-brand-hover active:scale-95"
             >
-              <span>Add Trackmail to Chrome</span>
+              <span>Add Trackmail to Chrome — Free</span>
               <span className="transition-transform duration-500 group-hover:translate-x-1">
                 →
               </span>
@@ -33,7 +33,7 @@ export function InstallCTA() {
           </div>
 
           <p className="mt-6 text-xs text-slate-400">
-            Works natively inside Gmail on Chrome · Free forever · No credit card needed
+            Works right inside your regular Gmail · 100% free · Zero credit card required
           </p>
         </div>
       </div>

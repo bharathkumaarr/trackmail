@@ -5,24 +5,28 @@ import { DoodleStar } from "./DoodleSVGs";
 
 const faqs = [
   {
-    q: "How does email tracking work?",
-    a: "A tiny 1×1 invisible pixel is added to your outgoing email. When the recipient opens the message, their email client fetches the pixel, recording an open event instantly.",
+    q: "Is it completely free? What's the catch?",
+    a: "Honestly, there's no catch. It's 100% free to use as of right now while we build and polish things. If demand keeps blowing up and server costs grow, we might roll out a premium tier down the road for heavy power users — but for now, enjoy unlimited tracking on the house.",
   },
   {
-    q: "Do I need a separate app or inbox?",
-    a: "Nope! Trackmail lives right inside Gmail's standard compose window. You compose and send emails as usual, with zero workflow interruption.",
+    q: "How does the tracking actually work?",
+    a: "Oldest trick in the book: we slip a tiny 1×1 invisible pixel into your outgoing email. The second your recipient opens the message, their mail client pings our server, and boom — we record the open and show it in your extension.",
   },
   {
-    q: "Will the recipient know the email is tracked?",
-    a: "No. The tracking pixel is completely invisible and does not alter the text, appearance, or delivery of your email.",
+    q: "Do I have to switch to another email app?",
+    a: "Heck no. We hate switching apps too. Trackmail sits right inside your regular Gmail compose window. You write, format, and hit send exactly like you always do.",
   },
   {
-    q: "Is it free to use?",
-    a: "Yes! Trackmail is free to install and use with unlimited tracking for your everyday emails.",
+    q: "Will people know I'm tracking their email?",
+    a: "Nope, totally stealth. The tracking pixel is completely invisible, doesn't add any annoying signatures or branding to your email, and won't mess with your deliverability.",
   },
   {
-    q: "What data do you collect?",
-    a: "Only the recipient address and subject line so you can identify your tracked messages in the popup. We never access, read, or store email bodies.",
+    q: "Are you guys reading my emails?",
+    a: "Zero chance. We don't read, store, or even look at what's inside your email body. We only keep the recipient address and subject line so you can tell which email got opened in your popup. That's literally it.",
+  },
+  {
+    q: "How accurate is the open tracking?",
+    a: "Pretty darn accurate for real opens! Just keep in mind that sometimes Gmail's image proxy or corporate spam filters pre-load images, which might trigger an instant open ping. But if you see 3x or 4x opens over a couple days, someone is definitely re-reading your email.",
   },
 ];
 
@@ -46,7 +50,7 @@ export function FAQ() {
           Frequently asked questions
         </h2>
         <p className="mt-3 text-sm text-ink-muted">
-          Everything you need to know about Trackmail and how it works.
+          All the straight-up answers, no corporate fluff.
         </p>
       </div>
 
