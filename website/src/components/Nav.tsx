@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DoodleStar } from "./DoodleSVGs";
+import { TrackmailLogoIcon } from "./TrackmailLogo";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,22 +26,9 @@ export function Nav() {
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className="group flex items-center gap-2 font-display text-2xl font-bold tracking-tight text-ink transition-smooth"
+          className="group flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight text-ink transition-smooth"
         >
-          <span className="flex size-8 items-center justify-center rounded-xl bg-brand text-white shadow-[0_2px_10px_rgba(79,70,229,0.35)] transition-smooth group-hover:rotate-6 group-hover:scale-105">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-4.5"
-            >
-              <path d="m22 2-7 20-4-9-9-4Z" />
-              <path d="M22 2 11 13" />
-            </svg>
-          </span>
+          <TrackmailLogoIcon className="size-8.5 rounded-xl shadow-[0_2px_10px_rgba(79,70,229,0.35)] transition-smooth group-hover:rotate-6 group-hover:scale-105" />
           <span className="flex items-center gap-1">
             Trackmail
             <DoodleStar className="size-3.5 text-amber opacity-90 transition-transform duration-300 group-hover:rotate-45 group-hover:scale-125" />

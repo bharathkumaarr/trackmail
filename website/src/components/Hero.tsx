@@ -6,6 +6,7 @@ import {
   HandDrawnOval,
   Highlighter,
 } from "./DoodleSVGs";
+import { TrackmailLogoIcon } from "./TrackmailLogo";
 
 export function Hero() {
   return (
@@ -14,8 +15,8 @@ export function Hero() {
         {/* Left Column: Copy & CTAs */}
         <div className="order-2 lg:order-1">
           {/* Top Pill Badge with Oval & Highlighter - Single Line */}
-          <div className="mb-6 inline-flex max-w-full items-center gap-2.5 overflow-x-auto rounded-full border border-border/80 bg-surface/90 px-4 py-2 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02] whitespace-nowrap">
-            <span className="flex size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="mb-6 inline-flex max-w-full items-center gap-2.5 overflow-x-auto rounded-full border border-border/80 bg-surface/90 px-3.5 py-1.5 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02] whitespace-nowrap">
+            <TrackmailLogoIcon className="size-4.5 shrink-0 rounded-md shadow-xs" />
             <HandDrawnOval className="shrink-0 text-brand font-bold">
               100% stealth
             </HandDrawnOval>
@@ -44,8 +45,9 @@ export function Hero() {
           <div className="mt-8 flex flex-nowrap items-center gap-3">
             <Link
               href="#install"
-              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
+              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
             >
+              <TrackmailLogoIcon className="size-5 shrink-0 rounded-md" />
               <span>Install for Chrome — Free</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HandDrawnArrow, DoodleStar } from "./DoodleSVGs";
+import { TrackmailLogoIcon } from "./TrackmailLogo";
 
 export function ComposeMock() {
   const [isTracked, setIsTracked] = useState(true);
@@ -19,10 +20,11 @@ export function ComposeMock() {
       </div>
 
       {/* Floating status card badge */}
-      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.08)] sm:flex items-center gap-2.5">
-        <span className="relative flex size-2.5">
+      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface px-3.5 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.08)] sm:flex items-center gap-2.5">
+        <TrackmailLogoIcon className="size-5 rounded-md shadow-xs" />
+        <span className="relative flex size-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
+          <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
         </span>
         <p className="text-xs font-semibold text-ink">Live Open Tracker</p>
       </div>
@@ -149,9 +151,9 @@ export function ComposeMock() {
               <p className="mt-0.5 text-xs text-ink-faint">sarah@designstudio.io</p>
             </div>
 
-            <span className="flex items-center gap-1 text-xs font-semibold text-brand">
-              <DoodleStar className="size-3.5 text-amber" />
-              {isTracked ? "Active" : "Off"}
+            <span className="flex items-center gap-1.5 rounded-full border border-brand/20 bg-brand-soft px-2.5 py-0.5 text-xs font-semibold text-brand">
+              <TrackmailLogoIcon className="size-3.5 rounded-xs" />
+              {isTracked ? "Trackmail Active" : "Off"}
             </span>
           </div>
 
