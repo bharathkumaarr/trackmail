@@ -19,15 +19,12 @@ export function ComposeMock() {
       </div>
 
       {/* Floating status card badge */}
-      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface p-3.5 shadow-[0_16px_32px_rgba(0,0,0,0.08)] backdrop-blur-md sm:flex items-center gap-3">
-        <span className="relative flex size-3">
+      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface px-4 py-2.5 shadow-[0_16px_32px_rgba(0,0,0,0.08)] sm:flex items-center gap-2.5">
+        <span className="relative flex size-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex size-3 rounded-full bg-emerald-500" />
+          <span className="relative inline-flex size-2.5 rounded-full bg-emerald-500" />
         </span>
-        <div>
-          <p className="text-xs font-semibold text-ink">Live Open Tracker</p>
-          <p className="text-[11px] text-ink-muted">100% stealth tracking active</p>
-        </div>
+        <p className="text-xs font-semibold text-ink">Live Open Tracker</p>
       </div>
 
       {/* Main Compose Card */}
