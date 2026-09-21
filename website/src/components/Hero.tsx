@@ -1,35 +1,29 @@
 import Link from "next/link";
 import { ComposeMock } from "./ComposeMock";
-import { DoodleCanvas } from "./DoodleCanvas";
 import {
   ScribbleUnderline,
   HandDrawnCircle,
   HandDrawnOval,
   Highlighter,
-  DoodleStar,
 } from "./DoodleSVGs";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden pt-8 pb-20 lg:pt-14 lg:pb-28">
-      {/* Interactive Canvas Background */}
-      <DoodleCanvas />
-
       <div className="relative z-10 mx-auto grid max-w-5xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16">
         {/* Left Column: Copy & CTAs */}
         <div className="order-2 lg:order-1">
-          {/* Top Pill Badge with Oval & Highlighter */}
-          <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-border/80 bg-surface/90 px-4 py-2 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02]">
-            <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
-            <HandDrawnOval className="text-brand font-bold">
+          {/* Top Pill Badge with Oval & Highlighter - Single Line */}
+          <div className="mb-6 inline-flex max-w-full items-center gap-2.5 overflow-x-auto rounded-full border border-border/80 bg-surface/90 px-4 py-2 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02] whitespace-nowrap">
+            <span className="flex size-2 shrink-0 rounded-full bg-emerald-500 animate-pulse" />
+            <HandDrawnOval className="shrink-0 text-brand font-bold">
               100% stealth
             </HandDrawnOval>
-            <span className="text-border">·</span>
-            <span>
+            <span className="shrink-0 text-border">·</span>
+            <span className="shrink-0">
               Zero signatures or badges —{" "}
               <Highlighter color="bg-amber-200/90">they'll never know</Highlighter>
             </span>
-            <DoodleStar className="size-3 text-amber" />
           </div>
 
           <h1 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
