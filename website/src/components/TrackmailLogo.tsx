@@ -17,21 +17,24 @@ export function TrackmailLogoIcon({
       {...props}
     >
       <rect width="32" height="32" rx="7.5" fill="#4F46E5" />
-      <path
-        d="M6.5 15.5L25.5 6.5L16.5 25.5L13.5 18.5L6.5 15.5Z"
-        fill="#FFFFFF"
-        stroke="#FFFFFF"
-        strokeWidth="0.5"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M25.5 6.5L13.5 18.5"
-        stroke="#4F46E5"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-      {/* Amber/yellow accent dot at the paper plane tip */}
-      <circle cx="25.5" cy="6.5" r="2.2" fill="#F59E0B" />
+      <g transform="translate(7, 7) scale(0.75)">
+        <path
+          d="m22 2-7 20-4-9-9-4Z"
+          fill="none"
+          stroke="#FFFFFF"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M22 2 11 13"
+          stroke="#FFFFFF"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <circle cx="22" cy="2" r="2.6" fill="#F59E0B" />
+      </g>
     </svg>
   );
 }
