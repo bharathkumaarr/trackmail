@@ -40,11 +40,11 @@ export function Hero() {
             your email without ever leaving your inbox.
           </p>
 
-          {/* CTAs */}
-          <div className="mt-8 flex flex-wrap items-center gap-3.5">
+          {/* CTAs - Locked on a Single Row */}
+          <div className="mt-8 flex flex-nowrap items-center gap-3">
             <Link
               href="#install"
-              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
+              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
             >
               <span>Install for Chrome — Free</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
@@ -54,7 +54,7 @@ export function Hero() {
 
             <Link
               href="#how"
-              className="inline-flex shrink-0 whitespace-nowrap items-center justify-center rounded-full border border-border bg-surface/90 px-6 py-3.5 text-base font-semibold text-ink shadow-xs backdrop-blur-xs transition-smooth hover:border-brand/40 hover:bg-brand-soft hover:text-brand"
+              className="inline-flex shrink-0 whitespace-nowrap items-center justify-center rounded-full border border-border bg-surface/90 px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-ink shadow-xs backdrop-blur-xs transition-smooth hover:border-brand/40 hover:bg-brand-soft hover:text-brand"
             >
               See how it works
             </Link>
