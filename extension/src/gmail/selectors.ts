@@ -13,8 +13,8 @@
  */
 
 export const SELECTORS = {
-  composeDialog: '[role="dialog"]',
-  sendButton: '[role="button"][aria-label*="Send"], [role="button"][data-tooltip*="Send"]',
+  composeDialog: '[role="dialog"], .AD, [role="region"], .M9, [aria-label*="New Message"]',
+  sendButton: '[role="button"][aria-label*="Send"], [role="button"][data-tooltip*="Send"], [data-tooltip*="Send"]',
   toField: '[aria-label="To"], [name="to"]',
   subjectField: 'input[name="subjectbox"]',
   bodyField: '[g_editable="true"][aria-label="Message Body"], [g_editable="true"][role="textbox"]',
@@ -30,7 +30,22 @@ export interface ComposeData {
 
 export function findComposeDialogs(): HTMLElement[] {
   const dialogs = document.querySelectorAll<HTMLElement>(SELECTORS.composeDialog);
-  return Array.from(dialogs).filter((d) => d.querySelector(SELECTORS.sendButton));
+  const matched = Array.from(dialogs).filter((d) => d.querySelector(SELECTORS.sendButton));
+
+  if (matched.length > 0) {
+    return matched;
+  }
+
+  // Fallback: search from Send button up to the compose container
+  const sendButtons = document.querySelectorAll<HTMLElement>(SELECTORS.sendButton);
+  const fallbackDialogs = new Set<HTMLElement>();
+  for (const btn of sendButtons) {
+    const parent = btn.closest<HTMLElement>('[role="dialog"], .AD, [role="region"], table.aoI, .M9, form');
+    if (parent) {
+      fallbackDialogs.add(parent);
+    }
+  }
+  return Array.from(fallbackDialogs);
 }
 
 export function getComposeId(element: HTMLElement): string {

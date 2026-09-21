@@ -1,37 +1,58 @@
 .mailtrack-toggle-container {
-  display: inline-flex;
-  align-items: center;
-  margin-left: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-family: 'Google Sans', Roboto, Arial, sans-serif;
-  font-size: 13px;
-  user-select: none;
+  display: inline-flex !important;
+  align-items: center !important;
+  margin-left: 10px !important;
+  padding: 4px 10px !important;
+  border-radius: 16px !important;
+  background-color: #f1f3f4 !important;
+  border: 1px solid #dadce0 !important;
+  font-family: 'Google Sans', Roboto, Arial, sans-serif !important;
+  font-size: 12px !important;
+  user-select: none !important;
+  vertical-align: middle !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.mailtrack-toggle-container:hover {
+  background-color: #e8eaed !important;
+  border-color: #c6c9cc !important;
 }
 
 .mailtrack-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  color: #5f6368;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  color: #3c4043 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .mailtrack-toggle-input {
-  width: 14px;
-  height: 14px;
-  cursor: pointer;
-  accent-color: #1a73e8;
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  accent-color: #1a73e8 !important;
+}
+
+.mailtrack-active {
+  background-color: #e8f0fe !important;
+  border-color: #1a73e8 !important;
 }
 
 .mailtrack-active .mailtrack-toggle {
-  color: #1a73e8;
+  color: #1a73e8 !important;
 }
 
 .mailtrack-active .mailtrack-toggle-label {
-  font-weight: 500;
+  font-weight: 600 !important;
 }
 
 .mailtrack-toggle-label {
-  white-space: nowrap;
+  white-space: nowrap !important;
+  font-size: 12px !important;
+  line-height: 16px !important;
 }

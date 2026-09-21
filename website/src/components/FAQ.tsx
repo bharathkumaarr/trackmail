@@ -1,47 +1,59 @@
+import { DoodleStar } from "./DoodleSVGs";
+
 const faqs = [
   {
     q: "How does email tracking work?",
-    a: "A tiny invisible image (tracking pixel) is embedded in your email. When the recipient's email client loads images, our server records an open event.",
+    a: "A tiny 1×1 invisible pixel is added to your outgoing email. When the recipient opens the message, their email client fetches the pixel, recording an open event instantly.",
   },
   {
-    q: "Do I need a separate email app?",
-    a: "No. Trackmail enhances Gmail's existing compose window. You never leave Gmail.",
+    q: "Do I need a separate app or inbox?",
+    a: "Nope! Trackmail lives right inside Gmail's standard compose window. You compose and send emails as usual, with zero workflow interruption.",
   },
   {
-    q: "How accurate is open tracking?",
-    a: "An open means the pixel was fetched — often via Gmail's image proxy — not proof a human read the email. Some opens may be false positives from prefetching.",
+    q: "Will the recipient know the email is tracked?",
+    a: "No. The tracking pixel is completely invisible and does not alter the text, appearance, or delivery of your email.",
   },
   {
-    q: "Is it free?",
-    a: "Yes for the MVP. The stack runs locally for $0 during development — PostgreSQL, Go backend, Chrome extension.",
+    q: "Is it free to use?",
+    a: "Yes! Trackmail is free to install and use with unlimited tracking for your everyday emails.",
   },
   {
     q: "What data do you collect?",
-    a: "Recipient address, subject line, open timestamps, and aggregated open counts. We do not store email body content.",
+    a: "Only the recipient address and subject line so you can identify your tracked messages in the popup. We never access, read, or store email bodies.",
   },
 ];
 
 export function FAQ() {
   return (
-    <section id="faq" className="mx-auto max-w-5xl px-6 py-16 lg:py-20">
-      <h2 className="font-display text-3xl font-bold tracking-tight text-ink lg:text-4xl">
-        Questions
-      </h2>
-      <div className="mt-10 flex flex-col gap-2">
+    <section id="faq" className="mx-auto max-w-4xl px-6 py-20 lg:py-28">
+      <div className="text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+          <DoodleStar className="size-3 text-amber" />
+          <span>Got questions?</span>
+        </div>
+        <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+          Frequently asked questions
+        </h2>
+        <p className="mt-3 text-sm text-ink-muted">
+          Everything you need to know about Trackmail and how it works.
+        </p>
+      </div>
+
+      <div className="mt-12 flex flex-col gap-3">
         {faqs.map((faq) => (
           <details
             key={faq.q}
-            className="group overflow-hidden rounded-xl border border-ink/10 bg-surface"
+            className="group overflow-hidden rounded-[20px] border border-border/80 bg-surface transition-smooth hover:border-brand/30 open:border-brand/40 open:shadow-[0_8px_24px_rgba(79,70,229,0.06)]"
           >
-            <summary className="flex items-center justify-between px-5 py-4 font-display text-base font-semibold">
-              {faq.q}
-              <span className="ml-4 text-xl font-normal text-terracotta transition group-open:rotate-45">
+            <summary className="flex items-center justify-between px-6 py-5 font-display text-base font-bold text-ink transition-smooth group-hover:text-brand">
+              <span>{faq.q}</span>
+              <span className="flex size-7 items-center justify-center rounded-full bg-canvas-subtle text-base font-semibold text-brand transition-transform duration-300 group-open:rotate-45 group-open:bg-brand-soft">
                 +
               </span>
             </summary>
-            <p className="px-5 pb-5 text-[15px] leading-relaxed text-ink-muted">
-              {faq.a}
-            </p>
+            <div className="border-t border-border/40 px-6 pb-6 pt-3 text-sm leading-relaxed text-ink-muted">
+              <p>{faq.a}</p>
+            </div>
           </details>
         ))}
       </div>

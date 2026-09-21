@@ -13,7 +13,7 @@
     "https://localhost:8080/*"
   ],
   "oauth2": {
-    "client_id": "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "88347924264-6jel32m47b4q5f3dbkk8g13pt40pnqjl.apps.googleusercontent.com",
     "scopes": [
       "openid",
       "email",

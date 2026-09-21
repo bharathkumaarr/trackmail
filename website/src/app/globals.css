@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-parchment: #f6f1e9;
-  --color-parchment-warm: #efe8dc;
-  --color-ink: #1c1814;
-  --color-ink-muted: #5c5349;
-  --color-ink-faint: #8a8178;
-  --color-terracotta: #b8462a;
-  --color-terracotta-hover: #9a3a22;
-  --color-forest: #2a4538;
-  --color-forest-dark: #1e3329;
-  --color-gold: #c9a227;
-  --color-gold-hover: #dbb52e;
-  --color-surface: #fffcf7;
+  --color-canvas: #fafaf8;
+  --color-canvas-subtle: #f3f3ee;
+  --color-surface: #ffffff;
+  
+  --color-ink: #0f172a;
+  --color-ink-muted: #475569;
+  --color-ink-faint: #94a3b8;
+  
+  --color-brand: #4f46e5;
+  --color-brand-hover: #4338ca;
+  --color-brand-light: #e0e7ff;
+  --color-brand-soft: #eef2ff;
+  
+  --color-accent: #f43f5e;
+  --color-accent-hover: #e11d48;
+  --color-accent-soft: #ffe4e6;
+  
+  --color-amber: #f59e0b;
+  --color-amber-soft: #fef3c7;
+  
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
 
-  --font-display: var(--font-petrona), Georgia, serif;
-  --font-body: var(--font-albert), system-ui, sans-serif;
+  --font-display: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  --font-doodle: var(--font-caveat), cursive, sans-serif;
 }
 
 html {
@@ -24,10 +35,78 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-parchment);
+  background-color: var(--color-canvas);
   color: var(--color-ink);
+  overflow-x: hidden;
+  background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
+/* Typography helper classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-doodle {
+  font-family: var(--font-doodle);
+}
+
+/* Smooth micro-interaction animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(-0.5deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+}
+
+@keyframes doodle-draw {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom interactive details/summary */
 details summary {
   cursor: pointer;
   list-style: none;
@@ -35,4 +114,13 @@ details summary {
 
 details summary::-webkit-details-marker {
   display: none;
+}
+
+/* Buttery smooth easing classes */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.transition-bounce {
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

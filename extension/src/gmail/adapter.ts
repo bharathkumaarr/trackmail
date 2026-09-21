@@ -56,6 +56,9 @@ export class GmailAdapter {
 
   private scanComposeWindows(): void {
     const dialogs = findComposeDialogs();
+    if (dialogs.length > 0) {
+      console.log(`[Mailtrack] Found ${dialogs.length} compose window(s)`);
+    }
     const seen = new Set<string>();
 
     for (const dialog of dialogs) {
@@ -64,6 +67,7 @@ export class GmailAdapter {
 
       if (this.controllers.has(id)) continue;
 
+      console.log(`[Mailtrack] Initializing tracking toggle for compose window:`, id);
       const controller = this.setupCompose(dialog, id);
       this.controllers.set(id, controller);
     }
@@ -147,7 +151,6 @@ export class GmailAdapter {
     getEnabled: () => boolean,
     setEnabled: (v: boolean) => void
   ): HTMLElement {
-    const toolbar = findToolbarArea(compose);
     const container = document.createElement('div');
     container.className = 'mailtrack-toggle-container';
 
@@ -166,18 +169,31 @@ export class GmailAdapter {
       setEnabled(checkbox.checked);
       text.textContent = checkbox.checked ? 'Track email ✓' : 'Track email';
       container.classList.toggle('mailtrack-active', checkbox.checked);
+      console.log('[Mailtrack] Tracking is now:', checkbox.checked ? 'ENABLED' : 'DISABLED');
     });
 
     label.appendChild(checkbox);
     label.appendChild(text);
     container.appendChild(label);
 
-    if (toolbar) {
+    // Prefer inserting directly in the cell beside the Send button
+    const sendBtn = findSendButton(compose);
+    const sendCell = sendBtn?.closest('td') || sendBtn?.parentElement;
+    const toolbar = findToolbarArea(compose);
+
+    if (sendCell) {
+      sendCell.appendChild(container);
+    } else if (toolbar && toolbar.tagName !== 'TR') {
       toolbar.appendChild(container);
+    } else if (toolbar) {
+      const td = document.createElement('td');
+      td.appendChild(container);
+      toolbar.appendChild(td);
     } else {
       compose.appendChild(container);
     }
 
+    console.log('[Mailtrack] Toggle button injected into DOM');
     return container;
   }
 }

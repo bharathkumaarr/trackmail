@@ -1,53 +1,90 @@
+import { DoodleStar, SquiggleDoodle } from "./DoodleSVGs";
+
 const features = [
   {
-    num: "01",
-    title: "Stays inside Gmail",
+    icon: "✉️",
+    badge: "Native Gmail",
+    title: "Lives directly in your inbox",
     description:
-      "Compose, format, attach, and send exactly as you always do. We add a toggle — not a new inbox.",
+      "No clunky secondary dashboard or external web client. Compose, format, attach files, and send exactly how you always have.",
+    accent: "bg-brand-soft text-brand border-brand/20",
   },
   {
-    num: "02",
-    title: "Open notifications",
+    icon: "⚡",
+    badge: "Real-Time",
+    title: "Instant open alerts",
     description:
-      "See when a recipient opens your email. Follow up while you're still top of mind.",
+      "Find out the moment your prospect, client, or teammate opens your message so you can follow up while you're still on their mind.",
+    accent: "bg-amber-soft text-amber border-amber/20",
   },
   {
-    num: "03",
-    title: "Per-email control",
+    icon: "🎯",
+    badge: "One-Click",
+    title: "Track only what matters",
     description:
-      "Enable tracking only when you need it. One click on, one click off.",
+      "Don't want to track personal emails to friends or family? Just flip the toggle off with one click. You have full per-email control.",
+    accent: "bg-accent-soft text-accent border-accent/20",
   },
   {
-    num: "04",
-    title: "Private by design",
+    icon: "🛡️",
+    badge: "Zero Creepiness",
+    title: "Private & secure by design",
     description:
-      "We don't store email bodies. Tracking tokens are hashed. IPs are never kept in raw form.",
+      "We never read or store email bodies. Tracking tokens are one-way hashed, and your sensitive communication stays strictly yours.",
+    accent: "bg-emerald-50 text-emerald-600 border-emerald-200",
   },
 ];
 
 export function Features() {
   return (
-    <section
-      id="features"
-      className="border-y border-ink/10 bg-surface py-16 lg:py-20"
-    >
+    <section id="features" className="relative py-20 lg:py-28">
       <div className="mx-auto max-w-5xl px-6">
-        <h2 className="font-display text-3xl font-bold tracking-tight text-ink lg:text-4xl">
-          Why Trackmail
-        </h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:gap-12">
-          {features.map((f) => (
-            <article key={f.num} className="py-2">
-              <span className="font-display text-sm font-bold text-terracotta">
-                {f.num}
-              </span>
-              <h3 className="mt-3 font-display text-xl font-semibold">
+        {/* Section Header */}
+        <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+              <DoodleStar className="size-3 text-amber" />
+              <span>Built for simplicity</span>
+            </div>
+            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              Everything you need.{" "}
+              <span className="text-brand">Nothing you don't.</span>
+            </h2>
+          </div>
+          <p className="max-w-xs text-sm text-ink-muted">
+            Designed to feel like a natural, buttery-smooth extension of your daily email routine.
+          </p>
+        </div>
+
+        {/* Feature Cards Grid */}
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:gap-8">
+          {features.map((f, i) => (
+            <div
+              key={f.title}
+              className="group relative overflow-hidden rounded-[24px] border border-border/80 bg-surface p-8 shadow-xs transition-bounce hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.12)]"
+            >
+              {/* Header inside card */}
+              <div className="flex items-center justify-between">
+                <span className="flex size-12 items-center justify-center rounded-2xl bg-canvas-subtle text-2xl shadow-xs transition-smooth group-hover:scale-110">
+                  {f.icon}
+                </span>
+                <span
+                  className={`rounded-full border px-3 py-1 text-xs font-semibold ${f.accent}`}
+                >
+                  {f.badge}
+                </span>
+              </div>
+
+              <h3 className="mt-6 font-display text-xl font-bold text-ink transition-smooth group-hover:text-brand">
                 {f.title}
               </h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-ink-muted">
+              <p className="mt-2.5 text-sm leading-relaxed text-ink-muted">
                 {f.description}
               </p>
-            </article>
+
+              {/* Subtle background gradient on hover */}
+              <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-brand-soft/40 opacity-0 blur-2xl transition-smooth group-hover:opacity-100" />
+            </div>
           ))}
         </div>
       </div>
