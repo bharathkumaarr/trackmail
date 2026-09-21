@@ -25,6 +25,12 @@ export const metadata: Metadata = {
   title: "Trackmail — Smooth, Simple Gmail Email Tracking",
   description:
     "Know when your emails are actually opened — directly inside Gmail. Zero clutter, buttery smooth, completely private.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "Trackmail — Email Tracker for Gmail",
     description:
