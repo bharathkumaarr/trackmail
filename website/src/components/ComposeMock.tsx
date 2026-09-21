@@ -26,7 +26,7 @@ export function ComposeMock() {
         </span>
         <div>
           <p className="text-xs font-semibold text-ink">Live Open Tracker</p>
-          <p className="text-[11px] text-ink-muted">Tracking 1×1 pixel active</p>
+          <p className="text-[11px] text-ink-muted">100% stealth tracking active</p>
         </div>
       </div>
 

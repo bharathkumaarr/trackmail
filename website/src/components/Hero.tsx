@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { ComposeMock } from "./ComposeMock";
 import { DoodleCanvas } from "./DoodleCanvas";
-import { ScribbleUnderline, HandDrawnCircle, DoodleStar, PaperPlaneDoodle } from "./DoodleSVGs";
+import {
+  ScribbleUnderline,
+  HandDrawnCircle,
+  HandDrawnOval,
+  Highlighter,
+  DoodleStar,
+} from "./DoodleSVGs";
 
 export function Hero() {
   return (
@@ -12,10 +18,17 @@ export function Hero() {
       <div className="relative z-10 mx-auto grid max-w-5xl items-center gap-12 px-6 lg:grid-cols-2 lg:gap-16">
         {/* Left Column: Copy & CTAs */}
         <div className="order-2 lg:order-1">
-          {/* Top Pill Badge */}
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft/80 px-4 py-1.5 text-xs font-semibold text-brand shadow-xs backdrop-blur-xs transition-bounce hover:scale-105">
-            <span className="flex size-2 rounded-full bg-brand animate-ping" />
-            <span>Smooth, zero-clutter tracking</span>
+          {/* Top Pill Badge with Oval & Highlighter */}
+          <div className="mb-6 inline-flex flex-wrap items-center gap-2 rounded-full border border-border/80 bg-surface/90 px-4 py-2 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02]">
+            <span className="flex size-2 rounded-full bg-emerald-500 animate-pulse" />
+            <HandDrawnOval className="text-brand font-bold">
+              100% stealth
+            </HandDrawnOval>
+            <span className="text-border">·</span>
+            <span>
+              Zero signatures or badges —{" "}
+              <Highlighter color="bg-amber-200/90">they'll never know</Highlighter>
+            </span>
             <DoodleStar className="size-3 text-amber" />
           </div>
 
@@ -28,14 +41,13 @@ export function Hero() {
             opened.
           </h1>
 
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-ink-muted">
-            A lightweight Chrome extension that lives right inside your normal Gmail
-            compose box. Toggle tracking on, click send, and see opens without
-            ever leaving your inbox.
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-muted">
+            Lives right inside Gmail. Just flip the toggle, hit send, and see who opened
+            your email without ever leaving your inbox.
           </p>
 
           {/* CTAs */}
-          <div className="mt-9 flex flex-col gap-3.5 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
             <Link
               href="#install"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-brand px-7 py-3.5 text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"

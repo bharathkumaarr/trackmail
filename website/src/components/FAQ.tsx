@@ -9,16 +9,12 @@ const faqs = [
     a: "Honestly, there's no catch. It's 100% free to use as of right now while we build and polish things. If demand keeps blowing up and server costs grow, we might roll out a premium tier down the road for heavy power users — but for now, enjoy unlimited tracking on the house.",
   },
   {
-    q: "How does the tracking actually work?",
-    a: "Oldest trick in the book: we slip a tiny 1×1 invisible pixel into your outgoing email. The second your recipient opens the message, their mail client pings our server, and boom — we record the open and show it in your extension.",
-  },
-  {
     q: "Do I have to switch to another email app?",
     a: "Heck no. We hate switching apps too. Trackmail sits right inside your regular Gmail compose window. You write, format, and hit send exactly like you always do.",
   },
   {
     q: "Will people know I'm tracking their email?",
-    a: "Nope, totally stealth. The tracking pixel is completely invisible, doesn't add any annoying signatures or branding to your email, and won't mess with your deliverability.",
+    a: "Nope, totally stealth. It's completely invisible to recipients — zero signatures, zero watermarks, zero badges. Your email looks 100% normal.",
   },
   {
     q: "Are you guys reading my emails?",

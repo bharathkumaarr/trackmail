@@ -87,6 +87,52 @@ export function HandDrawnCircle({
   );
 }
 
+export function HandDrawnOval({
+  children,
+  className = "text-amber",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <span className="relative inline-block px-3 py-0.5">
+      <span className="relative z-10">{children}</span>
+      <svg
+        viewBox="0 0 160 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={`pointer-events-none absolute -inset-x-2.5 -inset-y-1 h-[calc(100%+8px)] w-[calc(100%+20px)] overflow-visible ${className}`}
+        aria-hidden="true"
+      >
+        <path
+          d="M12 24C10 12 40 5 80 5C125 5 152 12 150 24C147 36 118 43 78 43C35 43 6 36 8 23C9 13 42 7 84 7"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+export function Highlighter({
+  children,
+  color = "bg-amber-200/80",
+}: {
+  children: React.ReactNode;
+  color?: string;
+}) {
+  return (
+    <span className="relative inline-block px-1.5 py-0.5">
+      <span
+        className={`absolute inset-x-0 bottom-0.5 top-1 -rotate-1 rounded-sm ${color} -z-0`}
+        aria-hidden="true"
+      />
+      <span className="relative z-10 font-bold">{children}</span>
+    </span>
+  );
+}
+
 export function PaperPlaneDoodle({ className = "text-brand" }: { className?: string }) {
   return (
     <svg

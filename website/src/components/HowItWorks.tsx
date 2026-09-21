@@ -16,7 +16,7 @@ const steps = [
   {
     num: "03",
     title: "Send normally",
-    description: "Gmail sends your email exactly as usual with a discrete tracking pixel inside.",
+    description: "Gmail sends your email exactly as usual — 100% stealth, no signatures, no tags.",
     tag: "zero friction",
   },
   {
