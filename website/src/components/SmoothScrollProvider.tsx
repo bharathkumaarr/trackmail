@@ -6,9 +6,9 @@ import Lenis from "lenis";
 export function SmoothScrollProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.8, // Slower, buttery smooth deceleration
+      duration: 1.2, // Balanced smooth duration - responsive yet silky
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential ease-out
-      wheelMultiplier: 0.85, // Gentle, slower scroll rate
+      wheelMultiplier: 1.0, // Natural scroll rate
       touchMultiplier: 1.2,
       infinite: false,
     });
@@ -24,7 +24,7 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
           e.preventDefault();
           lenis.scrollTo(el as HTMLElement, {
             offset: -80,
-            duration: 1.8,
+            duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           });
         }

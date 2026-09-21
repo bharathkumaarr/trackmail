@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { DoodleStar } from "./DoodleSVGs";
 
 const faqs = [
@@ -24,6 +27,14 @@ const faqs = [
 ];
 
 export function FAQ() {
+  const [openIndexes, setOpenIndexes] = useState<number[]>([]);
+
+  const toggle = (index: number) => {
+    setOpenIndexes((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+
   return (
     <section id="faq" className="mx-auto max-w-4xl px-6 py-20 lg:py-28">
       <div className="text-center">
@@ -39,23 +50,50 @@ export function FAQ() {
         </p>
       </div>
 
-      <div className="mt-12 flex flex-col gap-3">
-        {faqs.map((faq) => (
-          <details
-            key={faq.q}
-            className="group overflow-hidden rounded-[20px] border border-border/80 bg-surface transition-smooth hover:border-brand/30 open:border-brand/40 open:shadow-[0_8px_24px_rgba(79,70,229,0.06)]"
-          >
-            <summary className="flex items-center justify-between px-6 py-5 font-display text-base font-bold text-ink transition-smooth group-hover:text-brand">
-              <span>{faq.q}</span>
-              <span className="flex size-7 items-center justify-center rounded-full bg-canvas-subtle text-base font-semibold text-brand transition-transform duration-300 group-open:rotate-45 group-open:bg-brand-soft">
-                +
-              </span>
-            </summary>
-            <div className="border-t border-border/40 px-6 pb-6 pt-3 text-sm leading-relaxed text-ink-muted">
-              <p>{faq.a}</p>
+      <div className="mt-12 flex flex-col gap-3.5">
+        {faqs.map((faq, idx) => {
+          const isOpen = openIndexes.includes(idx);
+          return (
+            <div
+              key={faq.q}
+              className={`overflow-hidden rounded-[20px] border bg-surface transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isOpen
+                  ? "border-brand/40 shadow-[0_12px_28px_rgba(79,70,229,0.06)]"
+                  : "border-border/80 hover:border-brand/30"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => toggle(idx)}
+                className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base font-bold text-ink transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-brand"
+              >
+                <span>{faq.q}</span>
+                <span
+                  className={`flex size-7 items-center justify-center rounded-full text-base font-semibold text-brand transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isOpen
+                      ? "rotate-45 bg-brand-soft"
+                      : "rotate-0 bg-canvas-subtle"
+                  }`}
+                >
+                  +
+                </span>
+              </button>
+
+              {/* Smooth Slower Accordion Collapse/Expand via CSS Grid */}
+              <div
+                className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="border-t border-border/40 px-6 pb-6 pt-3 text-sm leading-relaxed text-ink-muted">
+                    <p>{faq.a}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </details>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

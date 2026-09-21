@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans, Caveat } from "next/font/google";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -39,10 +40,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${plusJakarta.variable} ${caveat.variable} h-full scroll-smooth antialiased`}
+      className={`${outfit.variable} ${plusJakarta.variable} ${caveat.variable} h-full antialiased`}
     >
       <body className="min-h-full font-body text-ink selection:bg-brand-light selection:text-brand">
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
   );

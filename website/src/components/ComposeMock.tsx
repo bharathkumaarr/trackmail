@@ -138,7 +138,7 @@ export function ComposeMock() {
         <div
           className={`mx-6 mb-6 rounded-2xl border transition-smooth ${
             isTracked
-              ? "border-brand/20 bg-gradient-to-r from-brand-soft/80 to-amber-soft/40 shadow-xs"
+              ? "border-brand/30 bg-brand-soft shadow-xs"
               : "border-border/60 bg-canvas-subtle/50 opacity-60"
           } p-4`}
         >

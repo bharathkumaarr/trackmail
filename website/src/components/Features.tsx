@@ -1,8 +1,8 @@
-import { DoodleStar, SquiggleDoodle } from "./DoodleSVGs";
+import { DoodleStar } from "./DoodleSVGs";
 
 const features = [
   {
-    icon: "✉️",
+    num: "01",
     badge: "Native Gmail",
     title: "Lives directly in your inbox",
     description:
@@ -10,7 +10,7 @@ const features = [
     accent: "bg-brand-soft text-brand border-brand/20",
   },
   {
-    icon: "⚡",
+    num: "02",
     badge: "Real-Time",
     title: "Instant open alerts",
     description:
@@ -18,7 +18,7 @@ const features = [
     accent: "bg-amber-soft text-amber border-amber/20",
   },
   {
-    icon: "🎯",
+    num: "03",
     badge: "One-Click",
     title: "Track only what matters",
     description:
@@ -26,7 +26,7 @@ const features = [
     accent: "bg-accent-soft text-accent border-accent/20",
   },
   {
-    icon: "🛡️",
+    num: "04",
     badge: "Zero Creepiness",
     title: "Private & secure by design",
     description:
@@ -58,15 +58,15 @@ export function Features() {
 
         {/* Feature Cards Grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:gap-8">
-          {features.map((f, i) => (
+          {features.map((f) => (
             <div
               key={f.title}
               className="group relative overflow-hidden rounded-[24px] border border-border/80 bg-surface p-8 shadow-xs transition-bounce hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.12)]"
             >
-              {/* Header inside card */}
+              {/* Header inside card - Clean typography without emojis */}
               <div className="flex items-center justify-between">
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-canvas-subtle text-2xl shadow-xs transition-smooth group-hover:scale-110">
-                  {f.icon}
+                <span className="font-display text-2xl font-black text-ink-faint transition-smooth group-hover:text-brand">
+                  {f.num}
                 </span>
                 <span
                   className={`rounded-full border px-3 py-1 text-xs font-semibold ${f.accent}`}
@@ -81,9 +81,6 @@ export function Features() {
               <p className="mt-2.5 text-sm leading-relaxed text-ink-muted">
                 {f.description}
               </p>
-
-              {/* Subtle background gradient on hover */}
-              <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-brand-soft/40 opacity-0 blur-2xl transition-smooth group-hover:opacity-100" />
             </div>
           ))}
         </div>
