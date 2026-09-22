@@ -11,7 +11,7 @@ export function InstallCTA() {
             <TrackmailLogoIcon className="size-9 rounded-xl shadow-xs" />
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white select-none">
             <DoodleStar className="size-3 text-amber-400" />
             <span>Ready in under a minute</span>
           </div>
@@ -31,7 +31,7 @@ export function InstallCTA() {
               className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-brand px-8 py-4 text-base font-bold text-white shadow-sm transition-bounce hover:-translate-y-1 hover:bg-brand-hover active:scale-95"
             >
               <TrackmailLogoIcon className="size-5 rounded-md" />
-              <span>Add Trackmail to Chrome — Free</span>
+              <span>Add Trackmail to Chrome</span>
               <span className="transition-transform duration-500 group-hover:translate-x-1">
                 →
               </span>

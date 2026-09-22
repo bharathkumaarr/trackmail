@@ -15,7 +15,7 @@ export function Hero() {
         {/* Left Column: Copy & CTAs */}
         <div className="order-2 lg:order-1">
           {/* Top Pill Badge with Oval & Highlighter - Single Line */}
-          <div className="mb-6 inline-flex max-w-full items-center gap-2.5 overflow-x-auto rounded-full border border-border/80 bg-surface/90 px-3.5 py-1.5 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02] whitespace-nowrap">
+          <div className="mb-6 inline-flex max-w-full items-center gap-2.5 overflow-x-auto rounded-full border border-border/80 bg-surface/90 px-3.5 py-1.5 text-xs font-medium text-ink shadow-xs backdrop-blur-xs transition-bounce hover:scale-[1.02] whitespace-nowrap select-none">
             <TrackmailLogoIcon className="size-4.5 shrink-0 rounded-md shadow-xs" />
             <HandDrawnOval className="shrink-0 text-brand font-bold">
               100% stealth
@@ -48,7 +48,7 @@ export function Hero() {
               className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
             >
               <TrackmailLogoIcon className="size-5 shrink-0 rounded-md" />
-              <span>Install for Chrome — Free</span>
+              <span>Install for Chrome</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
@@ -63,7 +63,7 @@ export function Hero() {
           </div>
 
           {/* Social Proof & Casual Badges */}
-          <div className="mt-8 flex flex-wrap items-center gap-4 text-xs font-medium text-ink-muted">
+          <div className="mt-8 flex flex-wrap items-center gap-4 text-xs font-medium text-ink-muted select-none">
             <div className="flex items-center gap-1.5">
               <svg
                 viewBox="0 0 20 20"

@@ -20,7 +20,7 @@ export function ComposeMock() {
       </div>
 
       {/* Floating status card badge */}
-      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface px-3.5 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.08)] sm:flex items-center gap-2.5">
+      <div className="animate-float absolute -right-4 -top-6 z-20 hidden rounded-2xl border border-border bg-surface px-3.5 py-2 shadow-[0_16px_32px_rgba(0,0,0,0.08)] sm:flex items-center gap-2.5 select-none">
         <TrackmailLogoIcon className="size-5 rounded-md shadow-xs" />
         <span className="relative flex size-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -36,7 +36,7 @@ export function ComposeMock() {
         className="relative overflow-hidden rounded-[24px] border border-border/80 bg-surface shadow-[0_24px_60px_-15px_rgba(79,70,229,0.12)] transition-smooth hover:shadow-[0_32px_70px_-12px_rgba(79,70,229,0.18)]"
       >
         {/* Window Topbar */}
-        <div className="flex items-center justify-between border-b border-border/60 bg-canvas-subtle/70 px-4 py-3">
+        <div className="flex items-center justify-between border-b border-border/60 bg-canvas-subtle/70 px-4 py-3 select-none">
           <div className="flex items-center gap-2">
             <span className="size-3 rounded-full bg-rose-400" />
             <span className="size-3 rounded-full bg-amber-400" />
@@ -45,7 +45,7 @@ export function ComposeMock() {
               New Message
             </span>
           </div>
-          <span className="rounded-full bg-brand-soft px-2.5 py-0.5 text-[11px] font-semibold text-brand">
+          <span className="rounded-full bg-brand-soft px-2.5 py-0.5 text-[11px] font-semibold text-brand select-none">
             Interactive Preview
           </span>
         </div>
@@ -79,7 +79,7 @@ export function ComposeMock() {
               <button
                 type="button"
                 onClick={() => setOpenCount((prev) => prev + 1)}
-                className="flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white shadow-sm transition-bounce hover:bg-brand-hover active:scale-95"
+                className="flex items-center gap-1.5 rounded-full bg-brand px-4 py-2 text-xs font-semibold text-white shadow-sm transition-bounce hover:bg-brand-hover active:scale-95 cursor-pointer select-none"
               >
                 <span>Send</span>
                 <span className="text-[10px] opacity-80">⌘Enter</span>
@@ -89,7 +89,7 @@ export function ComposeMock() {
               <button
                 type="button"
                 onClick={() => setIsTracked(!isTracked)}
-                className={`group flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-smooth ${
+                className={`group flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition-smooth select-none ${
                   isTracked
                     ? "border-brand/40 bg-brand-soft text-brand font-semibold shadow-xs"
                     : "border-border bg-canvas hover:bg-canvas-subtle text-ink-muted"
@@ -101,32 +101,22 @@ export function ComposeMock() {
                   }`}
                 >
                   {isTracked && (
-                    <svg
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="size-3"
-                    >
-                      <polyline points="3 8 6.5 12 13 4" />
+                    <svg viewBox="0 0 14 14" fill="none" className="size-3 stroke-white stroke-2">
+                      <path d="M3 7.5L5.5 10L11 4.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   )}
                 </span>
-                <span>{isTracked ? "Track email ✓" : "Track email"}</span>
+                <span className="flex items-center gap-1">
+                  Track email
+                  <TrackmailLogoIcon className="size-3.5 rounded-xs" />
+                </span>
               </button>
             </div>
 
-            {/* Fake formatting buttons */}
-            <div className="flex items-center gap-1.5 text-ink-faint">
-              <span className="flex size-7 items-center justify-center rounded-md hover:bg-canvas text-xs font-bold">
-                Aa
-              </span>
-              <span className="flex size-7 items-center justify-center rounded-md hover:bg-canvas text-xs">
-                📎
-              </span>
-              <span className="flex size-7 items-center justify-center rounded-md hover:bg-canvas text-xs">
+            <div className="flex items-center gap-2 text-ink-faint">
+              <span className="text-xs">Font</span>
+              <span className="size-1 rounded-full bg-border" />
+              <span className="text-xs" role="img" aria-label="attachment">
                 🔗
               </span>
             </div>
@@ -142,7 +132,7 @@ export function ComposeMock() {
           } p-4`}
         >
           <div className="flex items-start justify-between gap-3">
-            <div>
+            <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
                 <span className="font-display text-sm font-semibold text-ink">
                   Quick follow-up on project proposal ✦
@@ -151,9 +141,9 @@ export function ComposeMock() {
               <p className="mt-0.5 text-xs text-ink-faint">sarah@designstudio.io</p>
             </div>
 
-            <span className="flex items-center gap-1.5 rounded-full border border-brand/20 bg-brand-soft px-2.5 py-0.5 text-xs font-semibold text-brand">
-              <TrackmailLogoIcon className="size-3.5 rounded-xs" />
-              {isTracked ? "Trackmail Active" : "Off"}
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-brand/20 bg-brand-soft px-2.5 py-0.5 text-xs font-semibold text-brand whitespace-nowrap select-none">
+              <TrackmailLogoIcon className="size-3.5 shrink-0 rounded-xs" />
+              <span>{isTracked ? "Trackmail Active" : "Off"}</span>
             </span>
           </div>
 

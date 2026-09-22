@@ -38,7 +38,7 @@ export function FAQ() {
   return (
     <section id="faq" className="mx-auto max-w-4xl px-6 py-20 lg:py-28">
       <div className="text-center">
-        <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand">
+        <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand select-none">
           <DoodleStar className="size-3 text-amber" />
           <span>Got questions?</span>
         </div>

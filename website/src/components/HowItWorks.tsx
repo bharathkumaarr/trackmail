@@ -32,7 +32,7 @@ export function HowItWorks() {
     <section id="how" className="relative py-20 lg:py-28 bg-canvas-subtle/50 border-y border-border/60">
       <div className="mx-auto max-w-5xl px-6">
         <div className="flex flex-col items-center text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber-soft px-3 py-1 text-xs font-semibold text-amber">
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber-soft px-3 py-1 text-xs font-semibold text-amber select-none">
             <DoodleStar className="size-3 text-amber" />
             <span>Effortless workflow</span>
           </div>
@@ -56,7 +56,7 @@ export function HowItWorks() {
                   <span className="font-display text-2xl font-black text-brand/30 transition-smooth group-hover:text-brand">
                     {step.num}
                   </span>
-                  <span className="rounded-full bg-canvas-subtle px-2.5 py-0.5 text-[11px] font-medium text-ink-muted">
+                  <span className="rounded-full bg-canvas-subtle px-2.5 py-0.5 text-[11px] font-medium text-ink-muted select-none">
                     {step.tag}
                   </span>
                 </div>
