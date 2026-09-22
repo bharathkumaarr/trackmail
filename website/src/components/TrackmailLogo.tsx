@@ -17,7 +17,7 @@ export function TrackmailLogoIcon({
       {...props}
     >
       <rect width="32" height="32" rx="7.5" fill="#4F46E5" />
-      <g transform="translate(7, 7) scale(0.75)">
+      <g transform="translate(5.5, 8.5) scale(0.7)">
         <path
           d="m22 2-7 20-4-9-9-4Z"
           fill="none"
@@ -33,8 +33,8 @@ export function TrackmailLogoIcon({
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-        <circle cx="22" cy="2" r="2.6" fill="#F59E0B" />
       </g>
+      <circle cx="25.5" cy="6.5" r="3.2" fill="#F59E0B" />
     </svg>
   );
 }
