@@ -2,8 +2,11 @@
 .mailtrack-toggle-container {
   display: inline-flex !important;
   align-items: center !important;
-  margin-left: 8px !important;
+  margin-left: 10px !important;
+  margin-right: 4px !important;
   vertical-align: middle !important;
+  height: 36px !important; /* Exactly matches Gmail Send button height */
+  align-self: center !important;
   box-sizing: border-box !important;
   user-select: none !important;
   -webkit-user-select: none !important;
@@ -12,8 +15,10 @@
 .mailtrack-toggle {
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 7px !important;
-  padding: 5px 12px 5px 9px !important;
+  height: 30px !important;
+  padding: 0 11px 0 9px !important;
   border-radius: 9999px !important;
   background-color: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
@@ -21,11 +26,14 @@
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
   font-size: 12px !important;
   font-weight: 500 !important;
-  line-height: 16px !important;
+  line-height: 1 !important;
   letter-spacing: -0.01em !important;
   cursor: pointer !important;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  vertical-align: middle !important;
 }
 
 .mailtrack-toggle:hover {
@@ -41,48 +49,68 @@
   width: 0 !important;
   height: 0 !important;
   margin: 0 !important;
+  padding: 0 !important;
   pointer-events: none !important;
 }
 
 /* Custom Checkbox Square (matches ComposeMock) */
 .mailtrack-checkbox-custom {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 15px !important;
-  height: 15px !important;
-  border-radius: 4px !important;
+  width: 14px !important;
+  height: 14px !important;
+  min-width: 14px !important;
+  min-height: 14px !important;
+  border-radius: 3.5px !important;
   border: 1.5px solid #cbd5e1 !important;
   background-color: #ffffff !important;
   box-sizing: border-box !important;
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
   flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
+  position: relative !important;
+  top: 0.5px !important; /* Optical center alignment with text cap-height */
 }
 
 .mailtrack-checkmark-svg {
-  width: 10px !important;
-  height: 10px !important;
+  width: 9px !important;
+  height: 9px !important;
   display: none !important;
+  pointer-events: none !important;
 }
 
 /* Label text */
 .mailtrack-toggle-label {
+  display: inline-flex !important;
+  align-items: center !important;
   white-space: nowrap !important;
   font-size: 12px !important;
   font-weight: 500 !important;
   color: inherit !important;
   line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   user-select: none !important;
+  vertical-align: middle !important;
 }
 
 /* Logo icon inside the pill */
 .mailtrack-logo-icon {
-  width: 15px !important;
-  height: 15px !important;
+  display: block !important;
+  width: 14px !important;
+  height: 14px !important;
   border-radius: 3.5px !important;
   flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
   box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2) !important;
   transition: transform 0.2s ease !important;
+  vertical-align: middle !important;
+  position: relative !important;
+  top: 0.5px !important; /* Optical center alignment matching checkbox */
 }
 
 .mailtrack-toggle:hover .mailtrack-logo-icon {

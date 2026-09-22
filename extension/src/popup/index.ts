@@ -64,8 +64,21 @@ function renderEmails(emails: TrackedEmail[]) {
             <svg class="badge-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            Opened ${formatTime(e.last_opened_at)}${e.open_count > 1 ? ` <span class="badge-count">${e.open_count}x</span>` : ''}
+            Opened ${formatTime(e.last_opened_at)}
           </span>
+          ${
+            e.open_count > 1
+              ? `
+              <span class="status-badge status-count-bubble">
+                <svg class="badge-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                ${e.open_count} times opened
+              </span>
+            `
+              : ''
+          }
         `;
       } else if (e.status === 'sent') {
         statusBadge = `

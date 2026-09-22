@@ -200,8 +200,8 @@ export class GmailAdapter {
     const logoSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     logoSvg.setAttribute('class', 'mailtrack-logo-icon');
     logoSvg.setAttribute('viewBox', '0 0 32 32');
-    logoSvg.setAttribute('width', '15');
-    logoSvg.setAttribute('height', '15');
+    logoSvg.setAttribute('width', '14');
+    logoSvg.setAttribute('height', '14');
     logoSvg.setAttribute('fill', 'none');
     logoSvg.innerHTML = `
       <rect width="32" height="32" rx="7.5" fill="#4F46E5"/>
