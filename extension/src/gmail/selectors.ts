@@ -29,35 +29,64 @@ export interface ComposeData {
 }
 
 export function findComposeDialogs(): HTMLElement[] {
-  const dialogs = document.querySelectorAll<HTMLElement>(SELECTORS.composeDialog);
-  const matched = Array.from(dialogs).filter((d) => d.querySelector(SELECTORS.sendButton));
-
-  if (matched.length > 0) {
-    return matched;
-  }
-
-  // Fallback: search from Send button up to the compose container
+  // Find all Send buttons first to guarantee strictly 1 container per compose window
   const sendButtons = document.querySelectorAll<HTMLElement>(SELECTORS.sendButton);
-  const fallbackDialogs = new Set<HTMLElement>();
+  const dialogs: HTMLElement[] = [];
+  const seenContainers = new Set<HTMLElement>();
+
   for (const btn of sendButtons) {
-    const parent = btn.closest<HTMLElement>('[role="dialog"], .AD, [role="region"], table.aoI, .M9, form');
-    if (parent) {
-      fallbackDialogs.add(parent);
+    // Ignore invisible / detached elements
+    if (btn.offsetParent === null && !btn.getClientRects().length) continue;
+
+    // Prioritize canonical top-level compose containers (.AD or [role="dialog"])
+    const container =
+      (btn.closest('.AD') as HTMLElement | null) ||
+      (btn.closest('[role="dialog"]') as HTMLElement | null) ||
+      (btn.closest('form') as HTMLElement | null) ||
+      (btn.closest('table.aoI') as HTMLElement | null) ||
+      (btn.closest('.M9') as HTMLElement | null) ||
+      btn.parentElement;
+
+    if (container && !seenContainers.has(container)) {
+      seenContainers.add(container);
+      dialogs.push(container);
     }
   }
-  return Array.from(fallbackDialogs);
+
+  // Fallback: search for dialogs only if no send button is rendered yet
+  if (dialogs.length === 0) {
+    const fallbackDialogs = document.querySelectorAll<HTMLElement>('.AD, [role="dialog"]');
+    for (const d of fallbackDialogs) {
+      if (!seenContainers.has(d)) {
+        seenContainers.add(d);
+        dialogs.push(d);
+      }
+    }
+  }
+
+  return dialogs;
 }
 
 export function getComposeId(element: HTMLElement): string {
-  // Use a stable identifier based on element position in DOM
+  const sendBtn = findSendButton(element);
+  if (sendBtn?.dataset.mailtrackId) {
+    return sendBtn.dataset.mailtrackId;
+  }
   const dialogs = findComposeDialogs();
   const index = dialogs.indexOf(element);
   return `compose-${index}-${element.dataset.mailtrackId || ''}`;
 }
 
 export function assignComposeId(element: HTMLElement): string {
+  const sendBtn = findSendButton(element);
+  if (sendBtn?.dataset.mailtrackId) {
+    element.dataset.mailtrackId = sendBtn.dataset.mailtrackId;
+    return sendBtn.dataset.mailtrackId;
+  }
   if (!element.dataset.mailtrackId) {
-    element.dataset.mailtrackId = crypto.randomUUID().slice(0, 8);
+    const id = crypto.randomUUID().slice(0, 8);
+    element.dataset.mailtrackId = id;
+    if (sendBtn) sendBtn.dataset.mailtrackId = id;
   }
   return element.dataset.mailtrackId;
 }
