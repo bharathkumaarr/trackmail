@@ -95,29 +95,76 @@ export function findSendButton(compose: HTMLElement): HTMLElement | null {
   return compose.querySelector<HTMLElement>(SELECTORS.sendButton);
 }
 
-export function getRecipients(compose: HTMLElement): string {
-  const toField = compose.querySelector<HTMLElement>(SELECTORS.toField);
-  if (!toField) return '';
+const EMAIL_REGEX = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
 
-  // Gmail uses chips for recipients — collect email text
-  const chips = compose.querySelectorAll('[email]');
+export function getRecipients(compose: HTMLElement): string {
+  const root = compose.closest<HTMLElement>('.AD, [role="dialog"], form, .M9') || compose;
+
+  // 1. Search for recipient chips with email attribute or data-hovercard-id
+  const chips = root.querySelectorAll<HTMLElement>('[email], [data-hovercard-id*="@"], .vR span[email], .afV');
   if (chips.length > 0) {
-    return Array.from(chips)
-      .map((c) => c.getAttribute('email') || c.textContent || '')
-      .filter(Boolean)
-      .join(', ');
+    const found: string[] = [];
+    chips.forEach((c) => {
+      const raw = c.getAttribute('email') || c.getAttribute('data-hovercard-id') || c.textContent || '';
+      const matches = raw.match(EMAIL_REGEX);
+      if (matches) found.push(...matches);
+    });
+    if (found.length > 0) {
+      return Array.from(new Set(found)).join(', ');
+    }
   }
 
-  return toField.textContent?.trim() || (toField as HTMLInputElement).value?.trim() || '';
+  // 2. Check input and textarea fields across modern Gmail selectors
+  const toSelectors = [
+    'input[name="to"]',
+    'textarea[name="to"]',
+    'input[aria-label*="To"]',
+    'textarea[aria-label*="To"]',
+    '[aria-label*="To recipients"]',
+    'input.agP',
+    '[name="to"]',
+    '[aria-label="To"]',
+  ];
+
+  for (const sel of toSelectors) {
+    const el = root.querySelector<HTMLElement>(sel);
+    if (el) {
+      const raw = (el as HTMLInputElement).value?.trim() || el.textContent?.trim() || '';
+      const matches = raw.match(EMAIL_REGEX);
+      if (matches && matches.length > 0) {
+        return Array.from(new Set(matches)).join(', ');
+      }
+      if (raw && raw.includes('@')) {
+        return raw;
+      }
+    }
+  }
+
+  // 3. Fallback: scan any text containing @ in recipient header containers
+  const toHeaders = root.querySelectorAll<HTMLElement>('tr.fX, .fX, .vR, [data-recipient]');
+  for (const th of toHeaders) {
+    const matches = (th.textContent || '').match(EMAIL_REGEX);
+    if (matches && matches.length > 0) {
+      return Array.from(new Set(matches)).join(', ');
+    }
+  }
+
+  return '';
 }
 
 export function getSubject(compose: HTMLElement): string {
-  const field = compose.querySelector<HTMLInputElement>(SELECTORS.subjectField);
+  const root = compose.closest<HTMLElement>('.AD, [role="dialog"], form, .M9') || compose;
+  const field = root.querySelector<HTMLInputElement>(
+    'input[name="subjectbox"], input[aria-label*="Subject"], input[placeholder*="Subject"]'
+  );
   return field?.value?.trim() || '';
 }
 
 export function getBodyElement(compose: HTMLElement): HTMLElement | null {
-  return compose.querySelector<HTMLElement>(SELECTORS.bodyField);
+  const root = compose.closest<HTMLElement>('.AD, [role="dialog"], form, .M9') || compose;
+  return root.querySelector<HTMLElement>(
+    '[g_editable="true"][aria-label*="Message Body"], [g_editable="true"][role="textbox"], [contenteditable="true"][aria-label*="Message Body"], [contenteditable="true"][role="textbox"], .editable, .Am'
+  ) || compose.querySelector<HTMLElement>('[g_editable="true"], [contenteditable="true"]');
 }
 
 /**
@@ -126,7 +173,10 @@ export function getBodyElement(compose: HTMLElement): HTMLElement | null {
  */
 export function injectTrackingPixel(compose: HTMLElement, pixelHTML: string): boolean {
   const body = getBodyElement(compose);
-  if (!body) return false;
+  if (!body) {
+    console.warn('[Mailtrack] compose body element not found for pixel injection');
+    return false;
+  }
 
   // Avoid duplicate injection
   if (body.querySelector('[data-mailtrack-pixel]')) return true;
@@ -136,6 +186,7 @@ export function injectTrackingPixel(compose: HTMLElement, pixelHTML: string): bo
   wrapper.style.display = 'none';
   wrapper.innerHTML = pixelHTML;
   body.appendChild(wrapper);
+  console.log('[Mailtrack] Injected tracking pixel into email body');
   return true;
 }
 

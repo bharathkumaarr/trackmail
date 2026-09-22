@@ -87,7 +87,8 @@ export class GmailAdapter {
   }
 
   private setupCompose(element: HTMLElement, id: string): ComposeController {
-    let isTrackingEnabled = false;
+    // Enabled by default so users don't have to manually check every compose window
+    let isTrackingEnabled = true;
     let trackedEmailId: string | null = null;
 
     const sendBtn = findSendButton(element);
@@ -100,14 +101,22 @@ export class GmailAdapter {
     });
 
     const sendHandler = async (e: Event) => {
-      if (!isTrackingEnabled) return;
+      if (!isTrackingEnabled) {
+        console.log('[Mailtrack] Send triggered, but tracking is disabled');
+        return;
+      }
 
       const recipients = getRecipients(element);
-      const subject = getSubject(element);
+      const subject = getSubject(element) || '(no subject)';
 
-      if (!recipients) return;
+      console.log('[Mailtrack] Preparing to track email to:', recipients, 'subject:', subject);
 
-      // Prevent default send briefly while we prepare tracking
+      if (!recipients) {
+        console.warn('[Mailtrack] Could not detect recipient, sending without tracking pixel');
+        return;
+      }
+
+      // Prevent immediate send while preparing tracking
       e.preventDefault();
       e.stopImmediatePropagation();
 
@@ -127,21 +136,54 @@ export class GmailAdapter {
           trackedEmailId = result.trackedEmailId;
         }
 
+        console.log('[Mailtrack] Tracking prepared successfully, dispatching final send');
+
         // Re-trigger Gmail send after pixel injection
         sendBtn?.removeEventListener('click', sendHandler, true);
-        sendBtn?.click();
-        // Re-attach for future sends (unlikely in same compose, but safe)
-        setTimeout(() => sendBtn?.addEventListener('click', sendHandler, true), 100);
-      } catch (err) {
+        element.removeEventListener('keydown', keyHandler, true);
+
+        if (sendBtn) {
+          sendBtn.click();
+        }
+
+        setTimeout(() => {
+          sendBtn?.addEventListener('click', sendHandler, true);
+          element.addEventListener('keydown', keyHandler, true);
+        }, 800);
+      } catch (err: any) {
         console.error('[Mailtrack] send preparation failed:', err);
+        const msg = err?.message || '';
+        if (msg.includes('Extension context invalidated')) {
+          alert('Trackmail: Extension was updated or reloaded. Please refresh this Gmail tab (Cmd+R / F5) to reconnect tracking.');
+        } else if (msg.includes('Not authenticated')) {
+          alert('Trackmail: Please open the Trackmail extension popup and sign in to enable email tracking.');
+        }
+
         // Allow send even if tracking fails
         sendBtn?.removeEventListener('click', sendHandler, true);
-        sendBtn?.click();
-        setTimeout(() => sendBtn?.addEventListener('click', sendHandler, true), 100);
+        element.removeEventListener('keydown', keyHandler, true);
+
+        if (sendBtn) {
+          sendBtn.click();
+        }
+
+        setTimeout(() => {
+          sendBtn?.addEventListener('click', sendHandler, true);
+          element.addEventListener('keydown', keyHandler, true);
+        }, 800);
+      }
+    };
+
+    const keyHandler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        if (isTrackingEnabled) {
+          sendHandler(e);
+        }
       }
     };
 
     sendBtn?.addEventListener('click', sendHandler, true);
+    element.addEventListener('keydown', keyHandler, true);
 
     return {
       id,
@@ -150,6 +192,7 @@ export class GmailAdapter {
       get trackedEmailId() { return trackedEmailId; },
       destroy: () => {
         sendBtn?.removeEventListener('click', sendHandler, true);
+        element.removeEventListener('keydown', keyHandler, true);
         if (sendBtn) delete sendBtn.dataset.mailtrackAttached;
         toggle.remove();
       },
@@ -217,10 +260,22 @@ export class GmailAdapter {
       container.classList.toggle('mailtrack-active', checked);
     };
 
+    const toggleState = (e?: Event) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const next = !checkbox.checked;
+      checkbox.checked = next;
+      setEnabled(next);
+      updateVisualState(next);
+      console.log('[Mailtrack] Toggle clicked, tracking is now:', next ? 'ENABLED' : 'DISABLED');
+    };
+
+    label.addEventListener('click', toggleState);
     checkbox.addEventListener('change', () => {
       setEnabled(checkbox.checked);
       updateVisualState(checkbox.checked);
-      console.log('[Mailtrack] Tracking is now:', checkbox.checked ? 'ENABLED' : 'DISABLED');
     });
 
     label.appendChild(checkbox);
