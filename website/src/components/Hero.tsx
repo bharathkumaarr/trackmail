@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ComposeMock } from "./ComposeMock";
 import {
   ScribbleUnderline,
-  HandDrawnCircle,
   HandDrawnOval,
   Highlighter,
 } from "./DoodleSVGs";
@@ -93,9 +92,7 @@ export function Hero() {
                   clipRule="evenodd"
                 />
               </svg>
-              <HandDrawnCircle className="text-brand font-semibold">
-                100% private
-              </HandDrawnCircle>
+              <span>100% private</span>
             </div>
 
             <span className="size-1 rounded-full bg-border" />
