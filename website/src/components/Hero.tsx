@@ -81,11 +81,11 @@ export function Hero() {
 
             <span className="size-1 rounded-full bg-border" />
 
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 shrink-0 whitespace-nowrap">
               <svg
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="size-4 text-emerald-500"
+                className="size-4 shrink-0 text-emerald-500"
               >
                 <path
                   fillRule="evenodd"
@@ -93,7 +93,7 @@ export function Hero() {
                   clipRule="evenodd"
                 />
               </svg>
-              <HandDrawnCircle className="text-brand">
+              <HandDrawnCircle className="text-brand font-semibold">
                 100% private
               </HandDrawnCircle>
             </div>

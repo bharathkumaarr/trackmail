@@ -67,20 +67,23 @@ export function HandDrawnCircle({
   className?: string;
 }) {
   return (
-    <span className="relative inline-block px-2">
+    <span className="relative inline-block px-3 py-0.5">
       <span className="relative z-10">{children}</span>
       <svg
-        viewBox="0 0 120 50"
+        viewBox="0 0 140 44"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`pointer-events-none absolute -inset-x-2 -inset-y-1.5 h-[calc(100%+12px)] w-[calc(100%+16px)] overflow-visible ${className}`}
+        preserveAspectRatio="none"
+        className={`pointer-events-none absolute -inset-x-2.5 -inset-y-1.5 h-[calc(100%+12px)] w-[calc(100%+20px)] overflow-visible ${className}`}
         aria-hidden="true"
       >
         <path
-          d="M12 26C10 14 35 6 62 6C92 6 112 14 110 27C107 40 78 45 48 45C22 45 6 38 7 24C8 12 30 8 52 8"
+          d="M10 22 C8 10 32 4 70 4 C110 4 135 10 133 22 C130 34 105 40 70 40 C30 40 5 34 7 21 C8 11 34 5 72 5"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.75"
           strokeLinecap="round"
+          strokeLinejoin="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     </span>
@@ -101,14 +104,16 @@ export function HandDrawnOval({
         viewBox="0 0 160 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`pointer-events-none absolute -inset-x-2.5 -inset-y-1 h-[calc(100%+8px)] w-[calc(100%+20px)] overflow-visible ${className}`}
+        preserveAspectRatio="none"
+        className={`pointer-events-none absolute -inset-x-2.5 -inset-y-1.5 h-[calc(100%+12px)] w-[calc(100%+20px)] overflow-visible ${className}`}
         aria-hidden="true"
       >
         <path
           d="M12 24C10 12 40 5 80 5C125 5 152 12 150 24C147 36 118 43 78 43C35 43 6 36 8 23C9 13 42 7 84 7"
           stroke="currentColor"
-          strokeWidth="2"
+          strokeWidth="1.75"
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
         />
       </svg>
     </span>
