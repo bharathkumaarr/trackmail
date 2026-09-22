@@ -50,6 +50,10 @@ export class GmailAdapter {
   }
 
   private debouncedScan(): void {
+    if (typeof chrome !== 'undefined' && !chrome?.runtime?.id) {
+      this.stop();
+      return;
+    }
     if (this.debounceTimer) clearTimeout(this.debounceTimer);
     this.debounceTimer = setTimeout(() => this.scanComposeWindows(), 300);
   }
@@ -106,6 +110,23 @@ export class GmailAdapter {
         return;
       }
 
+      // Check if context is already invalidated before intercepting
+      const isContextDead = typeof chrome === 'undefined' || !chrome?.runtime?.id || typeof chrome.runtime?.sendMessage !== 'function';
+      if (isContextDead) {
+        const proceed = window.confirm(
+          'Trackmail: Extension was reloaded or updated.\n\n' +
+          'Please refresh this Gmail tab (Cmd+R / F5) to enable email tracking.\n\n' +
+          '• Click Cancel to keep your draft so you can refresh and track this email.\n' +
+          '• Click OK to send now WITHOUT tracking.'
+        );
+        if (!proceed) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          return;
+        }
+        return;
+      }
+
       const recipients = getRecipients(element);
       const subject = getSubject(element) || '(no subject)';
 
@@ -152,14 +173,46 @@ export class GmailAdapter {
         }, 800);
       } catch (err: any) {
         console.error('[Mailtrack] send preparation failed:', err);
-        const msg = err?.message || '';
-        if (msg.includes('Extension context invalidated')) {
-          alert('Trackmail: Extension was updated or reloaded. Please refresh this Gmail tab (Cmd+R / F5) to reconnect tracking.');
-        } else if (msg.includes('Not authenticated')) {
-          alert('Trackmail: Please open the Trackmail extension popup and sign in to enable email tracking.');
+        const msg = err?.message || String(err);
+        const isContextInvalid =
+          msg.includes('Extension context invalidated') ||
+          msg.includes('context invalidated') ||
+          msg.includes('sendMessage') ||
+          msg.includes('Cannot read properties of undefined');
+
+        const isAuthError =
+          msg.includes('Not authenticated') ||
+          msg.includes('OAuth failed') ||
+          msg.includes('sign in');
+
+        let userPrompt = '';
+        if (isContextInvalid) {
+          userPrompt =
+            'Trackmail: Extension was updated or reloaded.\n\n' +
+            'Please refresh this Gmail tab (Cmd+R / F5) to enable email tracking.\n\n' +
+            '• Click Cancel to keep your draft so you can refresh the page.\n' +
+            '• Click OK to send now WITHOUT tracking.';
+        } else if (isAuthError) {
+          userPrompt =
+            'Trackmail: Not signed in.\n\n' +
+            'Please open the Trackmail extension popup and click "Sign in with Google" to enable tracking.\n\n' +
+            '• Click Cancel to sign in first and track this email.\n' +
+            '• Click OK to send now WITHOUT tracking.';
+        } else {
+          userPrompt =
+            `Trackmail: Could not attach tracking (${msg}).\n\n` +
+            '• Click Cancel to keep your draft.\n' +
+            '• Click OK to send now WITHOUT tracking.';
         }
 
-        // Allow send even if tracking fails
+        const proceedWithoutTracking = window.confirm(userPrompt);
+        if (!proceedWithoutTracking) {
+          sendBtn?.addEventListener('click', sendHandler, true);
+          element.addEventListener('keydown', keyHandler, true);
+          return;
+        }
+
+        // User confirmed sending without tracking
         sendBtn?.removeEventListener('click', sendHandler, true);
         element.removeEventListener('keydown', keyHandler, true);
 
@@ -264,6 +317,10 @@ export class GmailAdapter {
       if (e) {
         e.preventDefault();
         e.stopPropagation();
+      }
+      if (typeof chrome !== 'undefined' && !chrome?.runtime?.id) {
+        alert('Trackmail: Extension was reloaded. Please refresh this Gmail tab (Cmd+R / F5) to reconnect tracking.');
+        return;
       }
       const next = !checkbox.checked;
       checkbox.checked = next;
