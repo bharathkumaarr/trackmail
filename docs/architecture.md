@@ -2,7 +2,7 @@
 
 ## Overview
 
-Mailtrack is a Gmail email open-tracking system composed of a **Chrome Extension (Manifest V3)** and a **Go HTTP API** backed by **PostgreSQL**. Users continue composing and sending email in Gmail; the extension adds a "Track email" toggle and injects a tracking pixel when enabled.
+Trackmail is a Gmail email open-tracking system composed of a **Chrome Extension (Manifest V3)** and a **Go HTTP API** backed by **PostgreSQL**. Users continue composing and sending email in Gmail; the extension adds a "Track email" toggle and injects tracking metadata when enabled.
 
 ```
 ┌─────────────────┐     OAuth / API      ┌──────────────────┐

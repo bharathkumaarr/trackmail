@@ -1,27 +1,27 @@
-# Mailtrack — Gmail Email Tracker
+# Trackmail — Gmail Email Tracker
 
-Track when your Gmail emails are opened — directly inside Gmail. No separate email client required.
+Know when your Gmail emails are actually opened — directly inside Gmail. No separate email client required. 100% stealth, zero signatures, zero badges.
 
 ## How It Works
 
 1. Install the Chrome extension
 2. Sign in with Google
-3. Compose email in Gmail as usual
-4. Enable **Track email ✓** in the compose toolbar
+3. Compose your email in Gmail as usual
+4. Enable **Track email** right beside Gmail's Send button
 5. Click Gmail's normal **Send** button
-6. A tracking pixel is injected into the email
-7. When the recipient's client fetches the pixel, an open event is recorded
-8. View tracking status in the extension popup
+6. When your recipient opens the message, open timestamps and view counts update in real time
+7. View tracking status directly in your extension popup
 
 ### Important Limitation
 
-An "open" indicates the tracking pixel was **fetched** — often via Gmail's image proxy — **not proof** that a human read the email. Gmail may prefetch images, producing false positives and duplicate events.
+An "open" indicates the message was opened in the recipient's mail client. In some cases, corporate spam filters or Gmail's image proxy may prefetch assets, which can produce instant open events.
 
 ## Architecture
 
-- **Chrome Extension (Manifest V3)** — Gmail UI integration
-- **Go HTTP API** — authentication, tracking, email management
-- **PostgreSQL** — data storage ($0 local via Docker)
+- **Chrome Extension (Manifest V3)** — Native Gmail compose integration & popup dashboard
+- **Go HTTP API** — Authentication, tracking, and email management
+- **PostgreSQL** — Fast, robust data storage
+- **Landing Page** — Modern Next.js web application
 
 See [docs/architecture.md](docs/architecture.md) for details.
 
@@ -43,8 +43,8 @@ cp .env.example .env
 ```
 
 Edit `.env` with your values:
-- `JWT_SECRET` — random string
-- `IP_HASH_SALT` — random string
+- `JWT_SECRET` — random secret string
+- `IP_HASH_SALT` — random secret string
 - `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` — from Google Cloud Console
 - `ENCRYPTION_KEY` — `openssl rand -base64 32`
 
@@ -72,7 +72,6 @@ Verify: `curl http://localhost:8080/health`
 
 ```bash
 cd extension
-node scripts/generate-icons.mjs
 npm install
 npm run build
 ```
@@ -120,18 +119,13 @@ See [docs/api.md](docs/api.md).
 trackmail/
 ├── backend/          Go API server
 ├── extension/        Chrome extension (Manifest V3)
+├── website/          Next.js landing page
 ├── docs/             Architecture, API, security docs
 ├── docker-compose.yml
 ├── Makefile
 └── README.md
 ```
 
-## Cost
-
-**$0 for local development.** PostgreSQL runs in Docker. No Redis, Kafka, or paid services required for MVP.
-
-For production, deploy Go API + PostgreSQL on any VPS or free-tier PostgreSQL provider.
-
 ## License
 
-MIT
+Proprietary / Closed Source. All rights reserved.
