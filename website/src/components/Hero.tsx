@@ -45,7 +45,7 @@ export function Hero() {
           <div className="mt-8 flex flex-nowrap items-center gap-3">
             <Link
               href="#install"
-              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95"
+              className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-brand px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-[0_10px_25px_-5px_rgba(79,70,229,0.4)] transition-bounce hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-[0_16px_32px_-5px_rgba(79,70,229,0.5)] active:scale-95 select-none"
             >
               <TrackmailLogoIcon className="size-5 shrink-0 rounded-md" />
               <span>Install for Chrome</span>
@@ -56,7 +56,7 @@ export function Hero() {
 
             <Link
               href="#how"
-              className="inline-flex shrink-0 whitespace-nowrap items-center justify-center rounded-full border border-border bg-surface/90 px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-ink shadow-xs backdrop-blur-xs transition-smooth hover:border-brand/40 hover:bg-brand-soft hover:text-brand"
+              className="inline-flex shrink-0 whitespace-nowrap items-center justify-center rounded-full border border-border bg-surface/90 px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-base font-semibold text-ink shadow-xs backdrop-blur-xs transition-smooth hover:border-brand/40 hover:bg-brand-soft hover:text-brand select-none"
             >
               See how it works
             </Link>

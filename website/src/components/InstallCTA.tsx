@@ -28,7 +28,7 @@ export function InstallCTA() {
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="#"
-              className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-brand px-8 py-4 text-base font-bold text-white shadow-sm transition-bounce hover:-translate-y-1 hover:bg-brand-hover active:scale-95"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-brand px-8 py-4 text-base font-bold text-white shadow-sm transition-bounce hover:-translate-y-1 hover:bg-brand-hover active:scale-95 select-none"
             >
               <TrackmailLogoIcon className="size-5 rounded-md" />
               <span>Add Trackmail to Chrome</span>

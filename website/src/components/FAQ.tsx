@@ -65,7 +65,7 @@ export function FAQ() {
               <button
                 type="button"
                 onClick={() => toggle(idx)}
-                className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base font-bold text-ink transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-brand"
+                className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base font-bold text-ink transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-brand select-none cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <span

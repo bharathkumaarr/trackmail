@@ -57,7 +57,7 @@ export function Nav() {
 
           <Link
             href="#install"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-bounce hover:-translate-y-0.5 hover:bg-brand hover:shadow-[0_8px_20px_rgba(79,70,229,0.35)]"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-bounce hover:-translate-y-0.5 hover:bg-brand hover:shadow-[0_8px_20px_rgba(79,70,229,0.35)] select-none"
           >
             <span>Add to Chrome</span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
