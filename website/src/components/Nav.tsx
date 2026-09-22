@@ -23,15 +23,15 @@ export function Nav() {
           : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
         <Link
           href="/"
-          className="group flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight text-ink transition-smooth"
+          className="group flex items-center gap-2 font-display text-xl sm:text-2xl font-bold tracking-tight text-ink transition-smooth"
         >
-          <TrackmailLogoIcon className="size-8.5 rounded-xl shadow-[0_2px_10px_rgba(79,70,229,0.35)] transition-smooth group-hover:rotate-6 group-hover:scale-105" />
+          <TrackmailLogoIcon className="size-7.5 sm:size-8.5 rounded-xl shadow-[0_2px_10px_rgba(79,70,229,0.35)] transition-smooth group-hover:rotate-6 group-hover:scale-105" />
           <span className="flex items-center gap-1">
             Trackmail
-            <DoodleStar className="size-3.5 text-amber opacity-90 transition-transform duration-300 group-hover:rotate-45 group-hover:scale-125" />
+            <DoodleStar className="size-3 sm:size-3.5 text-amber opacity-90 transition-transform duration-300 group-hover:rotate-45 group-hover:scale-125" />
           </span>
         </Link>
 
@@ -57,7 +57,7 @@ export function Nav() {
 
           <Link
             href="#install"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-bounce hover:-translate-y-0.5 hover:bg-brand hover:shadow-[0_8px_20px_rgba(79,70,229,0.35)] select-none"
+            className="group relative inline-flex items-center gap-1.5 sm:gap-2 overflow-hidden rounded-full bg-ink px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition-bounce hover:-translate-y-0.5 hover:bg-brand hover:shadow-[0_8px_20px_rgba(79,70,229,0.35)] select-none"
           >
             <span>Add to Chrome</span>
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">

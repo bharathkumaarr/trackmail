@@ -36,27 +36,27 @@ export function FAQ() {
   };
 
   return (
-    <section id="faq" className="mx-auto max-w-4xl px-6 py-20 lg:py-28">
+    <section id="faq" className="mx-auto max-w-4xl px-4 sm:px-6 py-16 sm:py-20 lg:py-28">
       <div className="text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-brand-soft px-3 py-1 text-xs font-semibold text-brand select-none">
           <DoodleStar className="size-3 text-amber" />
           <span>Got questions?</span>
         </div>
-        <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 className="mt-3 font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink">
           Frequently asked questions
         </h2>
-        <p className="mt-3 text-sm text-ink-muted">
+        <p className="mt-3 text-xs sm:text-sm text-ink-muted">
           All the straight-up answers, no corporate fluff.
         </p>
       </div>
 
-      <div className="mt-12 flex flex-col gap-3.5">
+      <div className="mt-10 sm:mt-12 flex flex-col gap-3 sm:gap-3.5">
         {faqs.map((faq, idx) => {
           const isOpen = openIndexes.includes(idx);
           return (
             <div
               key={faq.q}
-              className={`overflow-hidden rounded-[20px] border bg-surface transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              className={`overflow-hidden rounded-[18px] sm:rounded-[20px] border bg-surface transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                 isOpen
                   ? "border-brand/40 shadow-[0_12px_28px_rgba(79,70,229,0.06)]"
                   : "border-border/80 hover:border-brand/30"
@@ -65,11 +65,11 @@ export function FAQ() {
               <button
                 type="button"
                 onClick={() => toggle(idx)}
-                className="flex w-full items-center justify-between px-6 py-5 text-left font-display text-base font-bold text-ink transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-brand select-none cursor-pointer"
+                className="flex w-full items-center justify-between gap-3 px-4 sm:px-6 py-4 sm:py-5 text-left font-display text-sm sm:text-base font-bold text-ink transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-brand select-none cursor-pointer"
               >
                 <span>{faq.q}</span>
                 <span
-                  className={`flex size-7 items-center justify-center rounded-full text-base font-semibold text-brand transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                  className={`flex size-6 sm:size-7 shrink-0 items-center justify-center rounded-full text-base font-semibold text-brand transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isOpen
                       ? "rotate-45 bg-brand-soft"
                       : "rotate-0 bg-canvas-subtle"
@@ -86,7 +86,7 @@ export function FAQ() {
                 }`}
               >
                 <div className="overflow-hidden">
-                  <div className="border-t border-border/40 px-6 pb-6 pt-3 text-sm leading-relaxed text-ink-muted">
+                  <div className="border-t border-border/40 px-4 sm:px-6 pb-5 sm:pb-6 pt-2.5 sm:pt-3 text-xs sm:text-sm leading-relaxed text-ink-muted">
                     <p>{faq.a}</p>
                   </div>
                 </div>

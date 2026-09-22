@@ -37,8 +37,8 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="relative py-20 lg:py-28">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="features" className="relative py-16 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Section Header */}
         <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
           <div>
@@ -46,22 +46,22 @@ export function Features() {
               <DoodleStar className="size-3 text-amber" />
               <span>Built for simplicity</span>
             </div>
-            <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            <h2 className="mt-3 font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink">
               Everything you need.{" "}
               <span className="text-brand">Nothing you don't.</span>
             </h2>
           </div>
-          <p className="max-w-xs text-sm text-ink-muted">
+          <p className="max-w-xs text-xs sm:text-sm text-ink-muted">
             Designed to feel like a natural, buttery-smooth extension of your daily email routine.
           </p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:gap-8">
+        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:gap-8">
           {features.map((f) => (
             <div
               key={f.title}
-              className="group relative overflow-hidden rounded-[24px] border border-border/80 bg-surface p-8 shadow-xs transition-bounce hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.12)]"
+              className="group relative overflow-hidden rounded-[20px] sm:rounded-[24px] border border-border/80 bg-surface p-6 sm:p-8 shadow-xs transition-bounce hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_20px_40px_-15px_rgba(79,70,229,0.12)]"
             >
               {/* Header inside card - Clean typography without emojis */}
               <div className="flex items-center justify-between">

@@ -29,27 +29,27 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how" className="relative py-20 lg:py-28 bg-canvas-subtle/50 border-y border-border/60">
-      <div className="mx-auto max-w-5xl px-6">
+    <section id="how" className="relative py-16 sm:py-20 lg:py-28 bg-canvas-subtle/50 border-y border-border/60">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="flex flex-col items-center text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-amber/30 bg-amber-soft px-3 py-1 text-xs font-semibold text-amber select-none">
             <DoodleStar className="size-3 text-amber" />
             <span>Effortless workflow</span>
           </div>
-          <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+          <h2 className="mt-3 font-display text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink">
             How it works
           </h2>
-          <p className="mt-3 max-w-md text-sm text-ink-muted">
+          <p className="mt-3 max-w-md text-xs sm:text-sm text-ink-muted">
             Four simple steps. No complicated onboarding, no tutorials needed.
           </p>
         </div>
 
         {/* Steps Cards */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, idx) => (
             <div
               key={step.title}
-              className="group relative flex flex-col justify-between rounded-[22px] border border-border/80 bg-surface p-6 shadow-xs transition-bounce hover:-translate-y-2 hover:border-brand/40 hover:shadow-[0_16px_32px_-10px_rgba(79,70,229,0.12)]"
+              className="group relative flex flex-col justify-between rounded-[20px] sm:rounded-[22px] border border-border/80 bg-surface p-5 sm:p-6 shadow-xs transition-bounce hover:-translate-y-2 hover:border-brand/40 hover:shadow-[0_16px_32px_-10px_rgba(79,70,229,0.12)]"
             >
               <div>
                 <div className="flex items-center justify-between">
